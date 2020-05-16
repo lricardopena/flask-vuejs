@@ -10,7 +10,12 @@ def index():
 
 @app.route('/about')
 def about():
-    return 'Luis Pena working examples'
+    return render_template('home/about.html')
+
+
+@app.route('/contact')
+def contact():
+    return render_template('home/contact.html')
 
 
 if __name__ == "__main__":
