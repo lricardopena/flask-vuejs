@@ -3,11 +3,13 @@ This repo contains a basic MVC arquitecture using flask as base (python 3).
 
 ## Routes
 The route of this frameworks if very similar on how the route of codeigniter works with a function of flask-restful esquema qith the actions (GET, PUT, DELETE, etc). This frameworks first is going to see if the route exist in the view and in case that doesn't exist is going to looking for the controller with the following logic depend on the prefix:
-
-| Primer encabezado | Segundo encabezado |
-| ------------- | ------------- |
-| Contenido de la celda  | Contenido de la celda  |
-| Contenido de la celda  | Contenido de la celda  |
+- **Controller**  */<file_controller>/<class_name>/* => the rest of the URL it will be the params for the function programed under in the path *controllers/<file_controller>.py* and class *<clas_name>* with name function with any the following methods: get, post, put, delete, patch, just like flask-restful but with a siglthy modification. **See the section Controllers for further details**.
+- **API** */api/<file_api>/<class_name>/* => the rest of the URL it will be the params for the function programed under in the path *api/<file_api>.py* and class *<clas_name>* with name function with any the following methods: get, post, put, delete, patch, just like flask-restful but with a siglthy modification. **See the section Api for further details**.
+ 
+ Examples
+| Method | URL | path of the file to searcher | Class | Function to call | Brief explanation |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
+| GET | '/example/helloworld/luis'  |  'controller.example.py' | HelloWorld | get | We are making a get method without a prefix "api/" so therefore the framework is going to search under the folder "controllers" the file "example.py" and the class *HelloWorld* (could it be also *helloworld* or *Helloworld*) and is going to call the function "get" of the class *HelloWorld* and is going to send the param "Luis" to the function. |
 
 
 '/<file_controller>/<class_name>' => the rest of the URL it will be the params for the function (GET, POST, DELETE) function
