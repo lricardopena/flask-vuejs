@@ -1,7 +1,7 @@
-from api.base import BaseApi
+from controllers.base import BaseController
 
 
-class Introduction(BaseApi):
+class Introduction(BaseController):
     def get(self):
         return {'Hi': 'Hello World!'}
 
@@ -10,6 +10,7 @@ class Introduction(BaseApi):
         return {'JSON sent': json_request_send}
 
 
-class Add:
+class Add(BaseController):
     def get(self, number):
+        number = int(number)
         return {'result': number + 2}
