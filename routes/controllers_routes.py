@@ -45,7 +45,6 @@ def catch_all(path):
 
 
 def return_module_path(path):
-    path = path.replace("-", "_")
     is_api_call = path.startswith("api/")
     folder_name = 'controllers'
     if is_api_call:
@@ -53,8 +52,8 @@ def return_module_path(path):
         folder_name = 'api'
     elements_query = path.split("/")
     # Filename
-    filename = elements_query[0]
-    class_name = elements_query[1]
+    filename = elements_query[0].replace("-", "_")
+    class_name = elements_query[1].replace("-", "_")
     params = elements_query[2:]
     module_str = '.'.join([folder_name, filename])
     return module_str, class_name, params
