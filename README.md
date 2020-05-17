@@ -21,7 +21,7 @@ All the views need to be located under the folder "views" because in this folder
 
 ## Controllers
 
-The controllers needs to be under the folder "controllers" from this folder the framework is going to search first the name of the file  after the name of the class, the framework automatically gets the name of the classes in the file searched an put it in lower case to find them, also reeplaces any *-* (hyphen) in case that the controller name or the class name have it (in the URL) and only these two. You can see example of this in the table above. Every class created in this folder needs to have the inheritant of the class: BaseController, for example this code:
+The controllers needs to be under the folder "controllers" from this folder the framework is going to search first the name of the file  after the name of the class, the framework automatically gets the name of the classes in the file searched an put it in lower case to find them, also reeplaces any *-* (hyphen) in case that the controller name or the class name have it (in the URL) and only these two. You can see example of this in the table above. Every class created in this folder needs to have the inheritant of the class *BaseController* you can acced to the request by the variable *my_request* from the class you can see an example of all this in the following code:
 ```
 from controllers.base import BaseController
 
@@ -49,7 +49,7 @@ Here we create this file with two possible functions, if we save this save file 
 | GET | */example/add/20*  |  'controller.example.py' | Add | get | We are making a get method so the framework is going to call the function *get*. |
 
 ## API calls
-All the api calls needs to start with the sufix "api/". This calls follow almost the same structure of the controllers, with the diference that this classes needs to be under the folder *api* and all the classes need to inheritance the **BaseApi** class. For example this code:
+All the api calls needs to start with the sufix "api/". This calls follow almost the same structure of the controllers, with the diference that this classes needs to be under the folder *api* and all the classes need to inheritance the **BaseApi** class and if you want to get access to the request you can found it in the variable *my_request* (just like the controller). For example this code:
 ```
 from flask import jsonify
 from api.base import BaseApi
