@@ -21,8 +21,51 @@ All the views need to be located under the folder "views" because in this folder
 
 ## Controllers
 
-The controllers needs to be under the folder "controllers" from this folder the framework is going to search first the name of the file  after the name of the class, the framework automatically gets the name of the classes in the file searched an put it in lower case to find them, also reeplaces any *-* (hyphen) in case that the controller name or the class name have it (in the URL) and only these two. You can see example of this in the table above.
+The controllers needs to be under the folder "controllers" from this folder the framework is going to search first the name of the file  after the name of the class, the framework automatically gets the name of the classes in the file searched an put it in lower case to find them, also reeplaces any *-* (hyphen) in case that the controller name or the class name have it (in the URL) and only these two. You can see example of this in the table above. Every class created in this folder needs to have the inheritant of the class: BaseController, for example this code:
+```
+from controllers.base import BaseController
+
+
+class HelloWorld(BaseController):
+    def get(self, name):
+        return {'Hi': 'Hello {}!'.format(name)}
+
+    def post(self):
+        json_request_send = self.my_request.get_json()
+        return {'JSON sent': json_request_send}
+
+
+class Add(BaseController):
+    def get(self, number):
+        number = int(number)
+        return {'result': number + 2}
+```
+Here we create this file with two possible functions, if we save this save file as: *example.py* under the folder *controllers* then we call these functions with any of the following:
+
+ Examples
+| Method | URL | Class | Function to call | Brief explanation |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
+| GET | '/example/helloworld/luis' | HelloWorld | get | The framework is going to search the file *example.py* in the path *controllers* and is going to instanciate the class *HelloWord* and run the function *get* because for the method |
+| POST | '/example/helloworld/luis'  | HelloWorld | post | The explanations is very similar to the previous one, but the framework is going to call the function *post*. |
+| GET | '/example/add/20'  |  Add | get | We are making a get method so the framework is going to call the function *get* |
 
 ## API calls
-All the api calls needs to start with the sufix "api/". This calls follow almost the same structure of the controllers, with the diference that this classes needs to be under the folder "api".
+All the api calls needs to start with the sufix "api/". This calls follow almost the same structure of the controllers, with the diference that this classes needs to be under the folder *api* and all the classes need to inheritance the **BaseApi** class. For example this code:
+```
+from flask import jsonify
+from api.base import BaseApi
 
+
+class Hello(BaseApi):
+    def get(self, name):
+        return jsonify({
+            "Name": name
+        })
+
+```
+Here we create this file with two possible functions, if we save this save file as: *example.py* under the folder *api* then we call this functions with any of the following:
+
+ Examples
+| Method | URL | Class | Function to call | Brief explanation |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
+| GET | '/api/example/hello/luis' | Hello | get | The framework is going to search the file *example.py* in the path *api* because the URL starts with the prefix */api/* and is going to instanciate the class *Hello* and run the function *get* because for the method |
